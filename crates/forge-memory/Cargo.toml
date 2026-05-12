@@ -1,0 +1,18 @@
+[package]
+name = "forge-memory"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Persistent memory service for Nexus Forge"
+
+[dependencies]
+forge-core = { workspace = true }
+rusqlite = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+tokio = { workspace = true }
+async-trait = { workspace = true }

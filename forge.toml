@@ -1,0 +1,71 @@
+# Nexus Forge Configuration
+# This is the default configuration file.
+
+[general]
+data_dir = "~/.nexus-forge"
+log_level = "info"
+max_concurrent_tasks = 8
+auto_approve_low_risk = true
+
+[models]
+default_provider = "anthropic"
+
+[[models.providers]]
+name = "anthropic"
+provider_type = "anthropic"
+api_base = "https://api.anthropic.com"
+# api_key set via ANTHROPIC_API_KEY env var
+
+[[models.providers]]
+name = "openai"
+provider_type = "openai"
+api_base = "https://api.openai.com"
+# api_key set via OPENAI_API_KEY env var
+
+[models.routing]
+# Task-type to model-tier routing
+[models.routing.rules.architecture_design]
+primary_tier = "frontier_reasoning"
+fallback_tier = "strong_general"
+max_tokens = 8192
+temperature = 0.3
+
+[models.routing.rules.code_implementation]
+primary_tier = "strong_general"
+fallback_tier = "code_specialized"
+max_tokens = 4096
+temperature = 0.2
+
+[models.routing.rules.code_review]
+primary_tier = "strong_general"
+fallback_tier = "frontier_reasoning"
+max_tokens = 4096
+temperature = 0.1
+
+[models.routing.rules.test_generation]
+primary_tier = "fast_efficient"
+fallback_tier = "strong_general"
+max_tokens = 4096
+temperature = 0.3
+
+[agents]
+max_revision_cycles = 3
+max_concurrent_agents = 4
+approval_required_for = ["deploy", "delete_files", "modify_schema"]
+
+[memory]
+max_project_memory_mb = 256
+compaction_interval_hours = 24
+relevance_decay_days = 30
+
+[execution]
+default_tier = "standard"
+container_runtime = "process"
+max_concurrent_sandboxes = 4
+default_timeout_seconds = 300
+
+[observability]
+log_format = "text"
+metrics_enabled = true
+traces_enabled = false
+event_retention_days = 30

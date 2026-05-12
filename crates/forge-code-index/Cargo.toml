@@ -1,0 +1,18 @@
+[package]
+name = "forge-code-index"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Code indexing and codebase intelligence for Nexus Forge"
+
+[dependencies]
+forge-core = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+tokio = { workspace = true }
+async-trait = { workspace = true }
+sha2 = { workspace = true }

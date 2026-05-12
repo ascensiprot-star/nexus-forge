@@ -1,0 +1,90 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/forge-core",
+    "crates/forge-eventbus",
+    "crates/forge-project",
+    "crates/forge-task-graph",
+    "crates/forge-memory",
+    "crates/forge-model-router",
+    "crates/forge-orchestrator",
+    "crates/forge-code-index",
+    "crates/forge-search",
+    "crates/forge-auth",
+    "crates/forge-execution",
+    "crates/forge-validation",
+    "crates/forge-observability",
+    "crates/forge-plugin",
+    "crates/forge-app",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/nexus-forge/nexus-forge"
+
+[workspace.dependencies]
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+async-trait = "0.1"
+futures = "0.3"
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+
+# Database
+rusqlite = { version = "0.31", features = ["bundled", "vtab", "column_decltype"] }
+
+# Logging & tracing
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+
+# Error handling
+thiserror = "1"
+anyhow = "1"
+
+# UUID
+uuid = { version = "1", features = ["v4", "v7", "serde"] }
+
+# Time
+chrono = { version = "0.4", features = ["serde"] }
+
+# HTTP client
+reqwest = { version = "0.12", features = ["json", "stream"] }
+
+# gRPC
+tonic = "0.12"
+prost = "0.13"
+
+# Config
+config = "0.14"
+
+# Crypto
+sha2 = "0.10"
+aes-gcm = "0.10"
+argon2 = "0.5"
+
+# Embedded NATS
+async-nats = "0.35"
+
+# Tree-sitter
+tree-sitter = "0.22"
+
+# Internal crates
+forge-core = { path = "crates/forge-core" }
+forge-eventbus = { path = "crates/forge-eventbus" }
+forge-project = { path = "crates/forge-project" }
+forge-task-graph = { path = "crates/forge-task-graph" }
+forge-memory = { path = "crates/forge-memory" }
+forge-model-router = { path = "crates/forge-model-router" }
+forge-orchestrator = { path = "crates/forge-orchestrator" }
+forge-code-index = { path = "crates/forge-code-index" }
+forge-search = { path = "crates/forge-search" }
+forge-auth = { path = "crates/forge-auth" }
+forge-execution = { path = "crates/forge-execution" }
+forge-validation = { path = "crates/forge-validation" }
+forge-observability = { path = "crates/forge-observability" }
+forge-plugin = { path = "crates/forge-plugin" }

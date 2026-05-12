@@ -1,0 +1,47 @@
+syntax = "proto3";
+package forge.project;
+
+service ProjectService {
+  rpc CreateProject(CreateProjectRequest) returns (Project);
+  rpc GetProject(GetProjectRequest) returns (Project);
+  rpc ListProjects(ListProjectsRequest) returns (ListProjectsResponse);
+  rpc UpdateProjectStatus(UpdateStatusRequest) returns (Project);
+  rpc DeleteProject(DeleteProjectRequest) returns (Empty);
+}
+
+message Empty {}
+
+message CreateProjectRequest {
+  string name = 1;
+  string root_path = 2;
+  map<string, string> settings = 3;
+}
+
+message GetProjectRequest {
+  string project_id = 1;
+}
+
+message ListProjectsRequest {}
+
+message ListProjectsResponse {
+  repeated Project projects = 1;
+}
+
+message UpdateStatusRequest {
+  string project_id = 1;
+  string new_status = 2;
+}
+
+message DeleteProjectRequest {
+  string project_id = 1;
+}
+
+message Project {
+  string id = 1;
+  string name = 2;
+  string root_path = 3;
+  string status = 4;
+  map<string, string> settings = 5;
+  string created_at = 6;
+  string updated_at = 7;
+}

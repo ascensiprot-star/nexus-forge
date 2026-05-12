@@ -1,0 +1,19 @@
+[package]
+name = "forge-model-router"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Multi-model routing and inference orchestration for Nexus Forge"
+
+[dependencies]
+forge-core = { workspace = true }
+reqwest = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+tokio = { workspace = true }
+async-trait = { workspace = true }
+futures = { workspace = true }

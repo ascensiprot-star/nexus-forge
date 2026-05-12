@@ -1,0 +1,87 @@
+syntax = "proto3";
+package forge.memory;
+
+service MemoryService {
+  rpc Store(StoreRequest) returns (StoreResponse);
+  rpc Retrieve(RetrieveRequest) returns (MemoryItem);
+  rpc Search(SearchRequest) returns (SearchResponse);
+  rpc StoreDecision(StoreDecisionRequest) returns (Decision);
+  rpc GetDecisions(GetDecisionsRequest) returns (DecisionList);
+}
+
+message StoreRequest {
+  string project_id = 1;
+  string layer = 2;
+  string item_type = 3;
+  string key = 4;
+  string title = 5;
+  string content = 6;
+  string source = 7;
+  double confidence = 8;
+  repeated string tags = 9;
+}
+
+message StoreResponse {
+  string item_id = 1;
+}
+
+message RetrieveRequest {
+  string project_id = 1;
+  string layer = 2;
+  string key = 3;
+}
+
+message SearchRequest {
+  string project_id = 1;
+  string query = 2;
+  repeated string layers = 3;
+  int32 limit = 4;
+}
+
+message SearchResponse {
+  repeated MemoryItem items = 1;
+}
+
+message MemoryItem {
+  string id = 1;
+  string project_id = 2;
+  string layer = 3;
+  string item_type = 4;
+  string key = 5;
+  string title = 6;
+  string content = 7;
+  string source = 8;
+  double confidence = 9;
+  repeated string tags = 10;
+  int32 access_count = 11;
+  string created_at = 12;
+}
+
+message StoreDecisionRequest {
+  string project_id = 1;
+  string decision_type = 2;
+  string title = 3;
+  string context = 4;
+  string chosen_option = 5;
+  repeated string rejected_options = 6;
+  string reasoning = 7;
+}
+
+message Decision {
+  string id = 1;
+  string project_id = 2;
+  string decision_type = 3;
+  string title = 4;
+  string chosen_option = 5;
+  string reasoning = 6;
+  string decided_at = 7;
+}
+
+message DecisionList {
+  repeated Decision decisions = 1;
+}
+
+message GetDecisionsRequest {
+  string project_id = 1;
+  string decision_type = 2;
+}

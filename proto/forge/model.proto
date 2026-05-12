@@ -1,0 +1,40 @@
+syntax = "proto3";
+package forge.model;
+
+service ModelRouterService {
+  rpc Complete(CompletionRequest) returns (CompletionResponse);
+  rpc GetRoutingDecision(RoutingRequest) returns (RoutingDecision);
+}
+
+message CompletionRequest {
+  string task_type = 1;
+  repeated Message messages = 2;
+  string model_id = 3;
+  int32 max_tokens = 4;
+  float temperature = 5;
+}
+
+message Message {
+  string role = 1;
+  string content = 2;
+}
+
+message CompletionResponse {
+  string content = 1;
+  string model_used = 2;
+  int32 input_tokens = 3;
+  int32 output_tokens = 4;
+  float cost_usd = 5;
+}
+
+message RoutingRequest {
+  string task_type = 1;
+  int32 estimated_tokens = 2;
+}
+
+message RoutingDecision {
+  string model_id = 1;
+  string tier = 2;
+  string reason = 3;
+  float estimated_cost = 4;
+}

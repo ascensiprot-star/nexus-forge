@@ -1,0 +1,66 @@
+syntax = "proto3";
+package forge.task;
+
+service TaskGraphService {
+  rpc CreateGraph(CreateGraphRequest) returns (TaskGraph);
+  rpc AddTask(AddTaskRequest) returns (Task);
+  rpc TransitionTask(TransitionRequest) returns (Task);
+  rpc GetReadyTasks(GetReadyTasksRequest) returns (TaskList);
+  rpc GetCriticalPath(CriticalPathRequest) returns (TaskList);
+}
+
+message CreateGraphRequest {
+  string project_id = 1;
+  string intent_text = 2;
+}
+
+message AddTaskRequest {
+  string graph_id = 1;
+  string title = 2;
+  string description = 3;
+  string task_type = 4;
+  int32 priority = 5;
+  repeated string dependency_ids = 6;
+}
+
+message TransitionRequest {
+  string task_id = 1;
+  string new_status = 2;
+}
+
+message GetReadyTasksRequest {
+  string graph_id = 1;
+}
+
+message CriticalPathRequest {
+  string graph_id = 1;
+}
+
+message TaskGraph {
+  string id = 1;
+  string project_id = 2;
+  string intent_text = 3;
+  repeated Task tasks = 4;
+}
+
+message Task {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  string status = 4;
+  string task_type = 5;
+  int32 priority = 6;
+  string assigned_agent = 7;
+  repeated string dependency_ids = 8;
+  EffortEstimate effort = 9;
+}
+
+message EffortEstimate {
+  int32 optimistic_minutes = 1;
+  int32 expected_minutes = 2;
+  int32 pessimistic_minutes = 3;
+}
+
+message TaskList {
+  repeated Task tasks = 1;
+}
